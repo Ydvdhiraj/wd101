@@ -29,7 +29,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin: 0 auto;
         }
 
         h1 {
@@ -83,7 +82,7 @@
         }
 
         .table-container h2 {
-            text-align: center;
+          text-align: center;
             font-size: 20px;
             margin-bottom: 10px;
         }
@@ -98,8 +97,7 @@
             text-align: left;
             font-weight: normal;
             font-size: 14px;
-            color: white;
-            background-color: #28a745;
+            color: #333;
         }
 
         td {
@@ -107,10 +105,6 @@
             text-align: left;
             font-size: 14px;
             border-top: 1px solid #ddd;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
         }
 
         @media (max-width: 600px) {
@@ -143,16 +137,15 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password" required minlength="8">
+                <input type="password" id="password" placeholder="Enter password" required>
             </div>
             <div class="form-group">
-                <label for="dob">Date of Birth (between 18 and 55 years old)</label>
-                <input type="date" id="dob" required>
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" placeholder="dd/mm/yyyy" required>
             </div>
             <div class="form-group">
                 <label>
-                    <input type="checkbox" id="terms" required>
-                    Accept <a href="#" style="color: #28a745;">Terms & Conditions</a>
+                    <input type="checkbox" id="terms"> Accept Terms & Conditions
                 </label>
             </div>
             <button type="submit">Submit</button>
@@ -166,14 +159,16 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Dob</th>
-                    <th>Accepted Terms?</th>
+                    <th>Password</th>
+                    <th>DOB</th>
+                    <th>Accepted terms?</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
         </table>
     </div>
 
-    <script src="index.js"></script>
+    <script src="index.js"> </script>
+
 </body>
 </html>
