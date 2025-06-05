@@ -1,16 +1,22 @@
-    const form = document.getElementById('registrationForm');
+const form = document.getElementById('registrationForm');
     const tableBody = document.getElementById('tableBody');
+
+    // Load saved entries from localStorage
+    window.onload = function () {
+        const entries = JSON.parse(localStorage.getItem('userEntries')) || [];
+        entries.forEach(entry => addRowToTable(entry));
+    };
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
         const dob = document.getElementById('dob').value;
         const terms = document.getElementById('terms').checked;
 
-        // Calculate age
+        // Age validation
         const dobDate = new Date(dob);
         const today = new Date();
         let age = today.getFullYear() - dobDate.getFullYear();
@@ -19,22 +25,32 @@
             age--;
         }
 
-        // Validate age between 18 and 55
         if (age < 18 || age > 55) {
             alert("Age must be between 18 and 55 years.");
             return;
         }
 
-        // Create new table row
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${name}</td>
-            <td>${email}</td>
-            <td>${password}</td>
-            <td>${dob}</td>
-            <td>${terms ? 'Yes' : 'No'}</td>
-        `;
+        // Save entry
+        const entry = { name, email, password, dob, terms };
+        const existingEntries = JSON.parse(localStorage.getItem('userEntries')) || [];
+        existingEntries.push(entry);
+        localStorage.setItem('userEntries', JSON.stringify(existingEntries));
 
-        tableBody.appendChild(row);
+        // Add to table
+        addRowToTable(entry);
+
+        // Reset form
         form.reset();
     });
+
+    function addRowToTable(entry) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${entry.name}</td>
+            <td>${entry.email}</td>
+            <td>${entry.password}</td>
+            <td>${entry.dob}</td>
+            <td>${entry.terms ? 'Yes' : 'No'}</td>
+        `;
+        tableBody.appendChild(row);
+    }
